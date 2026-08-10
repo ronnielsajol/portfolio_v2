@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -18,6 +18,7 @@ const NAV_LINKS = [
 
 export default function NavBar({ visible }: NavBarProps) {
 	const navRef = useRef<HTMLElement>(null);
+	const [isOpen, setIsOpen] = useState(false);
 
 	useGSAP(
 		() => {
@@ -40,83 +41,57 @@ export default function NavBar({ visible }: NavBarProps) {
 			ref={navRef}
 			id='site-nav'
 			aria-label='Main navigation'
-			style={{
-				position: "fixed",
-				top: 0,
-				left: 0,
-				right: 0,
-				zIndex: 40,
-				display: "flex",
-				alignItems: "center",
-				justifyContent: "space-between",
-				padding: "0 var(--page-gutter)",
-				height: "3.5rem",
-				background: "var(--color-paper)",
-				borderBottom: "var(--rule-accent)",
-				opacity: 0,
-			}}>
+			className='fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-page-gutter h-14 bg-paper border-b-2 border-accent opacity-0'>
 			{/* Wordmark */}
 			<a
 				href='#'
 				aria-label='Ronniel — home'
-				style={{
-					fontFamily: "var(--font-display)",
-					fontSize: "var(--text-lg)",
-					color: "var(--color-ink)",
-					textTransform: "uppercase",
-					letterSpacing: "-0.01em",
-					textDecoration: "none",
-					lineHeight: 1,
-				}}>
-				Ronniel
+				className='relative z-50 font-display text-md md:text-lg text-ink uppercase tracking-[-0.01em] no-underline leading-none'>
+				RON.DEV
 			</a>
 
-			{/* Nav links */}
-			<ul
-				role='list'
-				style={{
-					display: "flex",
-					gap: "var(--space-xl)",
-					listStyle: "none",
-					margin: 0,
-					padding: 0,
-				}}>
+			{/* Desktop Nav links */}
+			<ul role='list' className='hidden md:flex gap-xl list-none m-0 p-0'>
 				{NAV_LINKS.map(({ label, href }) => (
 					<li key={href}>
 						<a
 							href={href}
-							className='nav-link'
-							style={{
-								fontFamily: "var(--font-body)",
-								fontSize: "var(--text-sm)",
-								fontWeight: 700,
-								letterSpacing: "0.14em",
-								textTransform: "uppercase",
-								color: "var(--color-ink-2)",
-								textDecoration: "none",
-								transition: `color var(--dur-micro) var(--ease-out)`,
-							}}
-							onMouseEnter={(e) =>
-								((e.currentTarget as HTMLAnchorElement).style.color =
-									"var(--color-accent)")
-							}
-							onMouseLeave={(e) =>
-								((e.currentTarget as HTMLAnchorElement).style.color =
-									"var(--color-ink-2)")
-							}
-							onFocus={(e) =>
-								((e.currentTarget as HTMLAnchorElement).style.color =
-									"var(--color-accent)")
-							}
-							onBlur={(e) =>
-								((e.currentTarget as HTMLAnchorElement).style.color =
-									"var(--color-ink-2)")
-							}>
+							className='nav-link font-body text-sm font-bold tracking-[0.14em] uppercase text-ink-2 no-underline transition-colors duration-(--animate-dur-micro) ease-out hover:text-accent focus:text-accent outline-none'>
 							{label}
 						</a>
 					</li>
 				))}
 			</ul>
+
+			{/* Mobile Hamburger Button */}
+			<button
+				className='relative z-50 md:hidden flex flex-col justify-center items-center gap-1 w-8 h-8 focus:outline-none'
+				onClick={() => setIsOpen(!isOpen)}
+				aria-label='Toggle menu'
+				aria-expanded={isOpen}>
+				<div className={`w-6 h-0.5 bg-ink transition-transform duration-300 ${isOpen ? "rotate-45 translate-y-1.5" : ""}`} />
+				<div className={`w-6 h-0.5 bg-ink transition-opacity duration-300 ${isOpen ? "opacity-0" : ""}`} />
+				<div className={`w-6 h-0.5 bg-ink transition-transform duration-300 ${isOpen ? "-rotate-45 -translate-y-1.5" : ""}`} />
+			</button>
+
+			{/* Mobile Menu Overlay */}
+			<div
+				className={`transition-opacity duration-500 fixed inset-0 z-40 flex h-dvh w-screen flex-col items-center justify-center bg-paper backdrop-blur-md md:hidden ${
+					isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+				}`}>
+				<ul role='list' className='flex flex-col items-center justify-center gap-xl list-none m-0 p-0'>
+					{NAV_LINKS.map(({ label, href }) => (
+						<li key={href}>
+							<a
+								href={href}
+								onClick={() => setIsOpen(false)}
+								className='font-anton text-6xl uppercase tracking-normal text-ink no-underline hover:text-accent focus:text-accent outline-none transition-colors duration-300'>
+								{label}
+							</a>
+						</li>
+					))}
+				</ul>
+			</div>
 		</nav>
 	);
 }

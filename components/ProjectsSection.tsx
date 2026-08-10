@@ -80,139 +80,35 @@ export default function ProjectsSection() {
 		<section
 			id='work'
 			ref={sectionRef}
-			style={{
-				background: "var(--color-paper)",
-				padding: `var(--space-3xl) var(--page-gutter)`,
-				borderTop: "var(--rule-accent)",
-			}}
+			className='bg-paper py-3xl px-page-gutter border-t-2 border-accent'
 			aria-labelledby='work-heading'>
-
-			<h2
-				id='work-heading'
-				className='mono-label'
-				style={{
-					color: "var(--color-accent)",
-					marginBottom: "var(--space-2xl)",
-				}}>
+			<h2 id='work-heading' className='mono-label text-accent mb-2xl'>
 				Selected Work
 			</h2>
 
-			<ul
-				role='list'
-				style={{
-					display: "grid",
-					gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 28rem), 1fr))",
-					gap: "var(--space-md)",
-					listStyle: "none",
-					margin: 0,
-					padding: 0,
-				}}>
+			<ul role='list' className='grid grid-cols-[repeat(auto-fill,minmax(min(100%,28rem),1fr))] gap-md list-none m-0 p-0'>
 				{PROJECTS.map(({ title, tag, desc, url, year }) => (
 					<li key={title}>
 						<a
 							href={url ?? "#"}
-							className='project-card'
-							aria-label={`${title} — ${tag}`}
-							style={{
-								display: "block",
-								background: "var(--color-paper-2)",
-								border: "1px solid var(--color-border)",
-								borderTop: "var(--rule-accent)",
-								padding: "var(--space-lg)",
-								textDecoration: "none",
-								color: "inherit",
-								opacity: 0,
-								transition: `box-shadow var(--dur-short) var(--ease-out),
-								             border-color var(--dur-short) var(--ease-out)`,
-							}}
-							onMouseEnter={(e) => {
-								const el = e.currentTarget as HTMLAnchorElement;
-								el.style.boxShadow = "4px 4px 0 var(--color-accent)";
-								el.style.borderColor = "var(--color-accent)";
-							}}
-							onMouseLeave={(e) => {
-								const el = e.currentTarget as HTMLAnchorElement;
-								el.style.boxShadow = "none";
-								el.style.borderColor = "var(--color-border)";
-							}}
-							onFocus={(e) => {
-								const el = e.currentTarget as HTMLAnchorElement;
-								el.style.outline = `2px solid var(--color-focus)`;
-								el.style.outlineOffset = "2px";
-							}}
-							onBlur={(e) => {
-								const el = e.currentTarget as HTMLAnchorElement;
-								el.style.outline = "none";
-							}}>
-
+							className='project-card block bg-paper-2 border border-border border-t-2 border-t-accent p-lg no-underline text-inherit opacity-0 transition-all duration-[var(--animate-dur-short)] ease-out hover:shadow-[4px_4px_0_var(--color-accent)] hover:border-accent focus:outline-2 focus:outline-focus focus:outline-offset-2 outline-none'
+							aria-label={`${title} — ${tag}`}>
 							{/* Card header */}
-							<div
-								style={{
-									display: "flex",
-									justifyContent: "space-between",
-									alignItems: "flex-start",
-									marginBottom: "var(--space-md)",
-								}}>
-								<span
-									style={{
-										fontFamily: "var(--font-body)",
-										fontSize: "var(--text-xs)",
-										fontWeight: 700,
-										letterSpacing: "0.12em",
-										textTransform: "uppercase",
-										color: "var(--color-accent)",
-									}}>
-									{tag}
-								</span>
-								<span
-									style={{
-										fontFamily: "var(--font-body)",
-										fontSize: "var(--text-xs)",
-										color: "var(--color-ink-2)",
-										fontVariantNumeric: "tabular-nums",
-									}}>
-									{year}
-								</span>
+							<div className='flex justify-between items-start mb-md'>
+								<span className='font-body text-xs font-bold tracking-[0.12em] uppercase text-accent'>{tag}</span>
+								<span className='font-body text-xs text-ink-2 tabular-nums'>{year}</span>
 							</div>
 
 							{/* Title */}
-							<p
-								style={{
-									fontFamily: "var(--font-display)",
-									fontSize: "var(--text-2xl)",
-									textTransform: "uppercase",
-									letterSpacing: "-0.02em",
-									lineHeight: 1.05,
-									color: "var(--color-ink)",
-									margin: "0 0 var(--space-sm)",
-								}}>
+							<p className='font-display text-lg md:text-2xl uppercase tracking-[-0.02em] leading-[1.05] text-ink m-0 mb-sm'>
 								{title}
 							</p>
 
 							{/* Description */}
-							<p
-								style={{
-									fontFamily: "var(--font-body)",
-									fontSize: "var(--text-sm)",
-									lineHeight: 1.6,
-									color: "var(--color-ink-2)",
-									margin: "0 0 var(--space-lg)",
-									maxWidth: "48ch",
-								}}>
-								{desc}
-							</p>
+							<p className='font-body text-sm leading-[1.6] text-ink-2 m-0 mb-lg max-w-[48ch]'>{desc}</p>
 
 							{/* CTA */}
-							<span
-								aria-hidden='true'
-								style={{
-									fontFamily: "var(--font-body)",
-									fontSize: "var(--text-sm)",
-									fontWeight: 700,
-									letterSpacing: "0.08em",
-									textTransform: "uppercase",
-									color: "var(--color-accent)",
-								}}>
+							<span aria-hidden='true' className='font-body text-sm font-bold tracking-[0.08em] uppercase text-accent'>
 								View →
 							</span>
 						</a>

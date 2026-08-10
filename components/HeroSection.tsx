@@ -103,87 +103,29 @@ const HeroSection = ({ startAnimation }: HeroSectionProps) => {
 		<section
 			id='hero'
 			ref={sectionRef}
-			style={{
-				minHeight: "100svh",
-				display: "flex",
-				flexDirection: "column",
-				justifyContent: "flex-end",
-				padding: `0 var(--page-gutter) var(--space-xl)`,
-				background: "var(--color-paper)",
-				position: "relative",
-				paddingTop: "3.5rem" /* account for fixed nav */,
-			}}>
+			className='min-h-svh flex flex-col justify-end px-page-gutter pb-xl bg-paper relative pt-14'>
 			{/* Noise Overlay */}
 			<div
 				aria-hidden='true'
-				style={{
-					position: "absolute",
-					inset: 0,
-					zIndex: 0,
-					pointerEvents: "none",
-					backgroundImage: "url('/nnnoise.svg')",
-					backgroundRepeat: "repeat",
-					opacity: 0.45,
-				}}
+				className="absolute inset-0 z-0 pointer-events-none bg-[url('/nnnoise.svg')] bg-repeat opacity-45"
 			/>
 
 			{/* Accent bar — top-left vertical rule */}
-			<div
-				ref={accentBarRef}
-				aria-hidden='true'
-				style={{
-					position: "absolute",
-					left: "var(--page-gutter)",
-					top: "5rem",
-					width: "2px",
-					height: "3rem",
-					background: "var(--color-accent)",
-					zIndex: 1,
-				}}
-			/>
+			<div ref={accentBarRef} aria-hidden='true' className='absolute left-page-gutter top-20 w-0.5 h-[3rem] bg-accent z-10' />
 
 			<h1
 				ref={headingRef}
-				style={{
-					fontFamily: "var(--font-display)",
-					textTransform: "uppercase",
-					lineHeight: 1.03,
-					letterSpacing: "-0.0025em",
-					color: "var(--color-ink)",
-					opacity: 0,
-					margin: 0,
-					fontStyle: "normal",
-					overflow: "hidden",
-				}}
-				className='text-(length:--text-display-s) md:text-(length:--text-display) xl:text-(length:--text-display-xl)'>
-				<span
-					style={{
-						display: "block",
-						color: "var(--color-accent)",
-					}}>
-					{HERO_LINE_1}
-				</span>
-				<span style={{ display: "block" }}>{HERO_LINE_2}</span>
-				<span style={{ display: "block" }}>{HERO_LINE_3}</span>
+				className='font-display uppercase leading-[1.03] tracking-[-0.0025em] text-ink opacity-0 m-0 not-italic overflow-hidden text-display-s md:text-display-xl'>
+				<span className='block text-accent'>{HERO_LINE_1}</span>
+				<span className='block'>{HERO_LINE_2}</span>
+				<span className='block'>{HERO_LINE_3}</span>
 			</h1>
 
 			{/* Scroll indicator */}
 			<span
 				ref={indicatorRef}
 				aria-hidden='true'
-				style={{
-					fontFamily: "var(--font-body)",
-					fontSize: "var(--text-sm)",
-					fontWeight: 700,
-					letterSpacing: "0.12em",
-					textTransform: "uppercase",
-					color: "var(--color-ink-2)",
-					position: "absolute",
-					bottom: "var(--space-xl)",
-					right: "var(--page-gutter)",
-					opacity: 0,
-					transform: "translateY(8px)",
-				}}>
+				className='font-body text-sm font-bold tracking-[0.12em] uppercase text-ink-2 absolute right-page-gutter bottom-md opacity-0 translate-y-2'>
 				{HERO_SCROLL_LABEL}
 			</span>
 		</section>

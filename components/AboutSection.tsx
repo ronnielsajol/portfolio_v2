@@ -48,61 +48,26 @@ export default function AboutSection() {
 		<section
 			id='about'
 			ref={sectionRef}
-			style={{
-				background: "var(--color-paper)",
-				padding: `var(--space-3xl) var(--page-gutter)`,
-				borderTop: "var(--rule-accent)",
-			}}
+			className='bg-paper py-3xl px-page-gutter border-t-2 border-accent'
 			aria-labelledby='about-heading'>
-
-			<h2
-				id='about-heading'
-				className='mono-label'
-				style={{
-					color: "var(--color-accent)",
-					marginBottom: "var(--space-2xl)",
-				}}>
+			<h2 id='about-heading' className='mono-label text-accent mb-2xl'>
 				About
 			</h2>
 
-			<div
-				style={{
-					display: "flex",
-					flexDirection: "column",
-					gap: "var(--space-lg)",
-					maxWidth: "var(--page-max)",
-				}}>
+			<div className='flex flex-col gap-lg max-w-page-max'>
 				{ASSERTIONS.map(({ label, accentWord, rest }, i) => (
 					<p
 						key={label}
 						ref={(el) => {
 							if (el) linesRef.current[i] = el;
 						}}
-						style={{
-							fontFamily: "var(--font-display)",
-							fontSize: "var(--text-display-s)",
-							textTransform: "uppercase",
-							lineHeight: 1.05,
-							letterSpacing: "-0.02em",
-							color: "var(--color-ink)",
-							margin: 0,
-							opacity: 0,
-						}}>
+						className='font-display text-lg md:text-display-s uppercase leading-[1.05] tracking-[-0.001em] text-ink m-0 opacity-0'>
 						<span
 							aria-hidden='true'
-							style={{
-								fontFamily: "var(--font-body)",
-								fontSize: "var(--text-sm)",
-								fontWeight: 700,
-								letterSpacing: "0.1em",
-								color: "var(--color-ink-2)",
-								display: "inline-block",
-								marginRight: "var(--space-md)",
-								verticalAlign: "middle",
-							}}>
+							className='font-body text-sm font-bold tracking-widest text-ink-2 inline-block mr-md align-middle'>
 							{label}
 						</span>
-						<span style={{ color: "var(--color-accent)" }}>{accentWord}</span>
+						<span className='text-accent'>{accentWord}</span>
 						{rest}
 					</p>
 				))}

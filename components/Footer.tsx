@@ -56,97 +56,33 @@ export default function Footer() {
 			id='footer'
 			ref={containerRef}
 			aria-label='Site footer'
-			style={{
-				overflow: "hidden", // Required for the parallax clipping effect
-				position: "relative",
-				minHeight: "100vh",
-			}}>
+			className="overflow-hidden relative min-h-screen"
+		>
 			<div
 				ref={innerRef}
-				style={{
-					willChange: "transform",
-					display: "flex",
-					flexDirection: "column",
-					minHeight: "100vh",
-				}}>
+				className="flex flex-col min-h-screen will-change-transform"
+			>
 				{/* --- Contact Section --- */}
 				<section
 					id='contact'
-					style={{
-						background: "var(--color-accent)",
-						padding: `var(--space-3xl) var(--page-gutter)`,
-						borderTop: `4px solid oklch(38% 0.16 25)`,
-						display: "flex",
-						flexDirection: "column",
-						alignItems: "flex-start",
-						justifyContent: "center",
-						gap: "var(--space-2xl)",
-						flexGrow: 1,
-					}}
+					className="bg-accent py-3xl px-page-gutter border-t-4 border-accent-dim flex flex-col items-start justify-center gap-2xl grow"
 					aria-labelledby='contact-heading'>
 					<h2
 						id='contact-heading'
-						style={{
-							fontFamily: "var(--font-anton)",
-							fontSize: "var(--text-display)",
-							textTransform: "uppercase",
-							lineHeight: 1.03,
-							letterSpacing: "-0.03em",
-							color: "var(--color-paper)",
-							margin: 0,
-							fontStyle: "normal",
-						}}>
+						className="font-anton text-display uppercase leading-[1.03] tracking-[-0.03em] text-paper m-0 not-italic">
 						Let's Build Something.
 					</h2>
 
 					<a
 						id='contact-cta'
 						href={`mailto:${CONTACT_EMAIL}`}
-						style={{
-							display: "inline-block",
-							fontFamily: "var(--font-display)",
-							fontSize: "var(--text-lg)",
-							textTransform: "uppercase",
-							letterSpacing: "0.02em",
-							lineHeight: 1,
-							color: "var(--color-accent)",
-							background: "var(--color-paper)",
-							padding: `var(--space-md) var(--space-xl)`,
-							textDecoration: "none",
-							transition: `background var(--dur-micro) var(--ease-out),
-										 color var(--dur-micro) var(--ease-out),
-										 outline-offset var(--dur-micro) var(--ease-out)`,
-						}}
-						onMouseEnter={(e) => {
-							const el = e.currentTarget as HTMLAnchorElement;
-							el.style.background = "oklch(13% 0 0)";
-							el.style.color = "var(--color-accent)";
-						}}
-						onMouseLeave={(e) => {
-							const el = e.currentTarget as HTMLAnchorElement;
-							el.style.background = "var(--color-paper)";
-							el.style.color = "var(--color-accent)";
-						}}
-						onFocus={(e) => {
-							(e.currentTarget as HTMLAnchorElement).style.outline = "2px solid var(--color-paper)";
-							(e.currentTarget as HTMLAnchorElement).style.outlineOffset = "4px";
-						}}
-						onBlur={(e) => {
-							(e.currentTarget as HTMLAnchorElement).style.outline = "none";
-						}}>
+						className="inline-block font-display text-lg uppercase tracking-[0.02em] leading-none text-accent bg-paper py-md px-xl no-underline transition-all duration-[var(--animate-dur-micro)] ease-out hover:bg-paper-2 focus:outline-2 focus:outline-paper focus:outline-offset-4 outline-none">
 						Get In Touch
 					</a>
 
 					<ul
 						role='list'
-						style={{
-							display: "flex",
-							flexWrap: "wrap",
-							gap: "var(--space-xl)",
-							listStyle: "none",
-							margin: 0,
-							padding: 0,
-						}}>
+						className="flex flex-wrap gap-xl list-none m-0 p-0">
 						{SOCIAL_LINKS.map(({ label, href }) => (
 							<li key={label}>
 								<a
@@ -154,34 +90,7 @@ export default function Footer() {
 									target={href.startsWith("http") ? "_blank" : undefined}
 									rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
 									aria-label={`Open ${label}`}
-									style={{
-										fontFamily: "var(--font-body)",
-										fontSize: "var(--text-sm)",
-										fontWeight: 700,
-										letterSpacing: "0.1em",
-										textTransform: "uppercase",
-										color: "var(--color-paper)",
-										textDecoration: "none",
-										borderBottom: `1px solid oklch(38% 0.16 25)`,
-										paddingBottom: "2px",
-										transition: `border-color var(--dur-micro) var(--ease-out),
-													 color var(--dur-micro) var(--ease-out)`,
-									}}
-									onMouseEnter={(e) => {
-										const el = e.currentTarget as HTMLAnchorElement;
-										el.style.borderColor = "var(--color-paper)";
-									}}
-									onMouseLeave={(e) => {
-										const el = e.currentTarget as HTMLAnchorElement;
-										el.style.borderColor = "oklch(38% 0.16 25)";
-									}}
-									onFocus={(e) => {
-										(e.currentTarget as HTMLAnchorElement).style.outline = "2px solid var(--color-paper)";
-										(e.currentTarget as HTMLAnchorElement).style.outlineOffset = "4px";
-									}}
-									onBlur={(e) => {
-										(e.currentTarget as HTMLAnchorElement).style.outline = "none";
-									}}>
+									className="font-body text-sm font-bold tracking-[0.1em] uppercase text-paper no-underline border-b border-accent-dim pb-[2px] transition-colors duration-[var(--animate-dur-micro)] ease-out hover:border-paper focus:outline-2 focus:outline-paper focus:outline-offset-4 outline-none">
 									{label}
 								</a>
 							</li>
@@ -190,61 +99,25 @@ export default function Footer() {
 				</section>
 
 				{/* --- Marquee Section --- */}
-				<div
-					style={{
-						background: "var(--color-paper)",
-						borderTop: "var(--rule-accent)",
-						paddingTop: `var(--space-xl)`,
-						position: "relative",
-					}}>
+				<div className="bg-paper border-t-2 border-accent pt-xl relative">
 					<div
 						aria-hidden='true'
-						style={{
-							display: "flex",
-							width: "max-content",
-							animation: `marquee ${MARQUEE_SPEED_SECONDS}s linear infinite`,
-						}}>
+						className="flex w-max"
+						style={{ animation: `marquee ${MARQUEE_SPEED_SECONDS}s linear infinite` }}>
 						{Array.from({ length: COPIES }).map((_, i) => (
 							<span
 								key={i}
-								style={{
-									fontFamily: "var(--font-display)",
-									fontSize: "var(--text-2xl)",
-									textTransform: "uppercase",
-									letterSpacing: "-0.01em",
-									lineHeight: 1.1,
-									color: "var(--color-accent)",
-									paddingRight: "var(--space-2xl)",
-									whiteSpace: "nowrap",
-								}}>
+								className="font-display text-2xl uppercase tracking-[-0.01em] leading-[1.1] text-accent pr-2xl whitespace-nowrap">
 								{MARQUEE_TEXT}
 							</span>
 						))}
 					</div>
 
-					<p
-						style={{
-							position: "absolute",
-							width: "1px",
-							height: "1px",
-							overflow: "hidden",
-							clip: "rect(0 0 0 0)",
-							clipPath: "inset(50%)",
-							whiteSpace: "nowrap",
-						}}>
+					<p className="absolute w-[1px] h-[1px] overflow-hidden whitespace-nowrap [clip:rect(0_0_0_0)] [clip-path:inset(50%)]">
 						Ronniel · 2026 · Available for hire
 					</p>
 
-					<p
-						style={{
-							fontFamily: "var(--font-body)",
-							fontSize: "var(--text-xs)",
-							color: "var(--color-ink-2)",
-							letterSpacing: "0.06em",
-							textTransform: "uppercase",
-							margin: `var(--space-md) var(--page-gutter) 0`,
-							textAlign: "right",
-						}}>
+					<p className="font-body text-xs text-ink-2 tracking-[0.06em] uppercase mt-md mx-page-gutter mb-0 text-right">
 						&copy; {new Date().getFullYear()} Ronniel. All rights reserved.
 					</p>
 				</div>

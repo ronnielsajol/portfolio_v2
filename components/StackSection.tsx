@@ -52,49 +52,22 @@ export default function StackSection() {
 		<section
 			id='stack'
 			ref={sectionRef}
-			style={{
-				background: "var(--color-paper-inv)",
-				padding: `var(--space-3xl) var(--page-gutter)`,
-				borderTop: "var(--rule-accent)",
-			}}
+			className="bg-paper-inv py-3xl px-page-gutter border-t-2 border-accent"
 			aria-labelledby='stack-heading'>
 
 			<h2
 				id='stack-heading'
-				className='mono-label'
-				style={{
-					color: "var(--color-ink-inv-2)",
-					marginBottom: "var(--space-2xl)",
-				}}>
+				className="mono-label text-ink-inv-2 mb-2xl">
 				Stack
 			</h2>
 
 			<ul
 				role='list'
-				style={{
-					display: "flex",
-					flexWrap: "wrap",
-					gap: "var(--space-sm)",
-					listStyle: "none",
-					margin: 0,
-					padding: 0,
-				}}>
+				className="flex flex-wrap gap-sm list-none m-0 p-0">
 				{STACK.map((skill) => (
 					<li key={skill}>
 						<span
-							className='stack-chip'
-							style={{
-								display: "inline-block",
-								fontFamily: "var(--font-display)",
-								fontSize: "var(--text-md)",
-								textTransform: "uppercase",
-								letterSpacing: "-0.01em",
-								lineHeight: 1,
-								color: "var(--color-ink-inv)",
-								border: "var(--rule-accent)",
-								padding: `var(--space-sm) var(--space-md)`,
-								opacity: 0,
-							}}>
+							className="stack-chip inline-block font-display text-md uppercase tracking-[-0.01em] leading-none text-ink-inv border-2 border-accent py-sm px-md opacity-0">
 							{skill}
 						</span>
 					</li>
