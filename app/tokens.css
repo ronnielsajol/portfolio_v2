@@ -1,0 +1,73 @@
+/* Hallmark · genre: editorial · macrostructure: Manifesto · theme: custom
+ * vibe: "brutalist poster, black, scarlet, declaration energy"
+ * paper: oklch(9% 0 0) · accent: oklch(50% 0.22 25)
+ * display: PodiumSharp · body: Space Grotesk
+ * paper-band: dark · display-style: display-heavy · accent-hue: warm
+ * nav: N7 Brutal Slab · footer: Ft8 Marquee Scroll
+ * pre-emit critique: P5 H5 E5 S4 R4 V5
+ */
+
+:root {
+	/* ── Colour ───────────────────────────────────────────────────── */
+	--color-paper: oklch(9% 0 0); /* near-black */
+	--color-paper-2: oklch(13% 0 0); /* card surface */
+	--color-paper-inv: oklch(97% 0.002 25); /* off-white panels */
+	--color-ink: oklch(97% 0.002 25); /* off-white text on dark */
+	--color-ink-2: oklch(65% 0.005 25); /* muted text on dark */
+	--color-ink-inv: oklch(9% 0 0); /* dark text on light */
+	--color-ink-inv-2: oklch(30% 0.005 25); /* muted text on light */
+	--color-accent: oklch(50% 0.22 25); /* scarlet-red (#FF2400-ish) */
+	--color-accent-dim: oklch(38% 0.16 25); /* darker red — hover states */
+	--color-accent-bright: oklch(58% 0.24 25); /* brighter red — focus ring */
+	--color-border: oklch(22% 0.005 25); /* subtle border on dark */
+	--color-border-inv: oklch(80% 0.005 25); /* subtle border on light */
+	--color-focus: oklch(58% 0.24 25); /* focus ring */
+
+	/* ── Typography ──────────────────────────────────────────────── */
+	--font-display: "PodiumSharp", sans-serif;
+	--font-body: "Space Grotesk", sans-serif;
+
+	/* ── Type scale (major third 1.25 ratio from 16 px base) ─────── */
+	--text-xs: 0.64rem; /*  ~10 px */
+	--text-sm: 0.8rem; /*  ~13 px */
+	--text-base: 1rem; /*  16 px  */
+	--text-md: 1.25rem; /*  20 px  */
+	--text-lg: 1.5625rem; /*  25 px  */
+	--text-xl: 1.9531rem; /*  31 px  */
+	--text-2xl: 2.4414rem; /*  39 px  */
+	--text-3xl: 3.0518rem; /*  49 px  */
+	--text-4xl: 3.8147rem; /*  61 px  */
+	--text-display-s: clamp(2.5rem, 4vw + 1rem, 4rem);
+	--text-display: clamp(3.5rem, 7vw + 1rem, 6rem);
+	--text-display-xl: clamp(5rem, 11vw + 1rem, 8.5rem);
+
+	/* ── Spacing (4 pt grid) ─────────────────────────────────────── */
+	--space-1: 0.25rem; /*  4 px */
+	--space-2: 0.5rem; /*  8 px */
+	--space-3: 0.75rem; /* 12 px */
+	--space-sm: 1rem; /* 16 px */
+	--space-md: 1.5rem; /* 24 px */
+	--space-lg: 2rem; /* 32 px */
+	--space-xl: 3rem; /* 48 px */
+	--space-2xl: 4.5rem; /* 72 px */
+	--space-3xl: 6rem; /* 96 px */
+
+	/* ── Easing ──────────────────────────────────────────────────── */
+	--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+	--ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+	--ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+	/* ── Duration ────────────────────────────────────────────────── */
+	--dur-micro: 120ms;
+	--dur-short: 220ms;
+	--dur-long: 420ms;
+
+	/* ── Rules / borders ─────────────────────────────────────────── */
+	--rule-thin: 1px solid var(--color-border);
+	--rule-accent: 2px solid var(--color-accent);
+	--rule-heavy: 4px solid var(--color-accent);
+
+	/* ── Layout ──────────────────────────────────────────────────── */
+	--page-max: 90rem;
+	--page-gutter: clamp(1.25rem, 4vw, 3rem);
+}

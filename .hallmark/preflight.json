@@ -1,0 +1,9 @@
+{
+  "scannedAt": "2026-08-05",
+  "fontStack": "PodiumSharp (local OTF, next/font/local, app/layout.tsx L10)",
+  "palette": "custom dark oklch tokens in app/tokens.css",
+  "motion": "gsap 3.14 + @gsap/react + lenis 1.3 (package.json L12-14)",
+  "spacing": "4pt scale in app/tokens.css",
+  "framework": "Next.js 16 app router",
+  "preserves": ["PodiumSharp font", "GSAP + Lenis motion stack"]
+}
