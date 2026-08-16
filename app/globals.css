@@ -19,7 +19,7 @@
 	--font-anton: var(--font-anton);
 
 	/* Colour */
-	--color-paper: oklch(21.779% 0.00002 271.152);
+	--color-paper: oklch(13% 0.00002 271.152);
 	--color-paper-2: oklch(13% 0 0);
 	--color-paper-inv: oklch(97% 0.002 25);
 	--color-ink: oklch(97% 0.002 25);
