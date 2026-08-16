@@ -24,13 +24,14 @@ const COPIES = 6;
 export default function Footer() {
 	const containerRef = useRef<HTMLElement>(null);
 	const innerRef = useRef<HTMLDivElement>(null);
+	const marqueeRef = useRef<HTMLDivElement>(null);
 
 	useGSAP(
 		() => {
 			if (!innerRef.current || !containerRef.current) return;
 			gsap.fromTo(
 				innerRef.current,
-				{ yPercent: -30 },
+				{ yPercent: -150 },
 				{
 					yPercent: 0,
 					ease: "none",
@@ -42,12 +43,30 @@ export default function Footer() {
 					},
 				}
 			);
+			gsap.fromTo(
+				marqueeRef.current,
+				{ yPercent: 100 },
+				{
+					yPercent: 0,
+					ease: "none",
+					delay: 0.5,
+					scrollTrigger: {
+						trigger: innerRef.current,
+						start: "bottom bottom",
+						toggleActions: "play none none reverse",
+					},
+				}
+			);
 		},
 		{ scope: containerRef }
 	);
 
 	return (
-		<footer id='footer' ref={containerRef} aria-label='Site footer' className='overflow-hidden relative min-h-screen'>
+		<footer
+			id='footer'
+			ref={containerRef}
+			aria-label='Site footer'
+			className='bg-accent overflow-hidden relative min-h-screen'>
 			<div ref={innerRef} className='flex flex-col min-h-screen will-change-transform'>
 				<section
 					id='contact'
@@ -81,32 +100,30 @@ export default function Footer() {
 						))}
 					</ul>
 				</section>
-
-				{/* --- Marquee Section --- */}
-				<div className='bg-paper border-t-2 border-accent pt-xl relative'>
-					<div
-						aria-hidden='true'
-						className='flex w-max'
-						style={{ animation: `marquee ${MARQUEE_SPEED_SECONDS}s linear infinite` }}>
-						{Array.from({ length: COPIES }).map((_, i) => (
-							<span
-								key={i}
-								className='font-display text-2xl uppercase tracking-[-0.01em] leading-[1.1] text-accent pr-2xl whitespace-nowrap'>
-								{MARQUEE_TEXT}
-							</span>
-						))}
-					</div>
-
-					<p className='absolute w-px h-px overflow-hidden whitespace-nowrap [clip:rect(0_0_0_0)] [clip-path:inset(50%)]'>
-						Ronniel · 2026 · Available for hire
-					</p>
-
-					<p className='font-body text-xs text-ink-2 tracking-[0.06em] uppercase mt-md mx-page-gutter mb-0 text-right'>
-						&copy; {new Date().getFullYear()} Ronniel. All rights reserved.
-					</p>
-				</div>
 			</div>
+			{/* --- Marquee Section --- */}
+			<div className='bg-paper pt-xl relative' ref={marqueeRef}>
+				<div
+					aria-hidden='true'
+					className='flex w-max'
+					style={{ animation: `marquee ${MARQUEE_SPEED_SECONDS}s linear infinite` }}>
+					{Array.from({ length: COPIES }).map((_, i) => (
+						<span
+							key={i}
+							className='font-display text-2xl uppercase tracking-[-0.01em] leading-[1.1] text-accent pr-2xl whitespace-nowrap'>
+							{MARQUEE_TEXT}
+						</span>
+					))}
+				</div>
 
+				<p className='absolute w-px h-px overflow-hidden whitespace-nowrap [clip:rect(0_0_0_0)] [clip-path:inset(50%)]'>
+					Ronniel · 2026 · Available for hire
+				</p>
+
+				<p className='font-body text-xs text-ink-2 tracking-[0.06em] uppercase mt-md mx-page-gutter mb-0 text-right'>
+					&copy; {new Date().getFullYear()} Ronniel. All rights reserved.
+				</p>
+			</div>
 			<style>{`
 				@keyframes marquee {
 					from { transform: translateX(0); }
