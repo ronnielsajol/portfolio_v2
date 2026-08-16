@@ -49,7 +49,7 @@ export default function Footer() {
 				{
 					yPercent: 0,
 					ease: "none",
-					delay: 0.5,
+					delay: 0.9,
 					scrollTrigger: {
 						trigger: innerRef.current,
 						start: "bottom bottom",

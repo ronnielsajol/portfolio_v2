@@ -90,6 +90,19 @@ const HeroSection = ({ startAnimation }: HeroSectionProps) => {
 				});
 			}
 
+			gsap.fromTo(
+				indicatorRef.current,
+				{ yPercent: -50 }, // start with the second copy already shifted into place
+				{
+					yPercent: 0, // animate down to reveal the first copy
+					duration: 1.2,
+					ease: "power2.inOut",
+					repeat: -1,
+					repeatDelay: 0.6,
+					delay: tl.duration() + 0.3,
+				}
+			);
+
 			return () => {
 				charSplit.revert();
 				split.revert();
@@ -122,11 +135,13 @@ const HeroSection = ({ startAnimation }: HeroSectionProps) => {
 			</h1>
 
 			{/* Scroll indicator */}
-			<span
-				ref={indicatorRef}
-				aria-hidden='true'
-				className='font-body text-sm font-bold tracking-[0.12em] uppercase text-ink-2 absolute right-page-gutter bottom-md opacity-0 translate-y-2'>
-				{HERO_SCROLL_LABEL}
+			<span aria-hidden='true' className='absolute right-page-gutter bottom-md overflow-hidden inline-block h-[1.2em]'>
+				<span
+					ref={indicatorRef}
+					className='font-body text-sm font-bold tracking-[0.12em] uppercase text-ink-2 flex flex-col opacity-0 translate-y-2'>
+					<span>{HERO_SCROLL_LABEL}</span>
+					<span>{HERO_SCROLL_LABEL}</span>
+				</span>
 			</span>
 		</section>
 	);
