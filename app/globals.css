@@ -118,6 +118,20 @@ body.loading {
 	display: block;
 }
 
+.char-mask {
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: top;
+}
+.char-stack {
+	display: flex;
+	flex-direction: column;
+}
+.char-line {
+	display: block;
+	line-height: 1; /* must match so 50% = exactly one char's height */
+}
+
 /* ── Reduced motion ─────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
 	*,
