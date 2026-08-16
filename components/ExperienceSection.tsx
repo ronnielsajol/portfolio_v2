@@ -17,22 +17,30 @@ export const EXPERIENCE: {
 	desc: string;
 }[] = [
 	{
-		role: "Software Engineer",
-		company: "— to confirm",
-		period: "2024 — Present",
-		desc: "Full-stack product work. Feature development, architecture, shipping.",
+		role: "Full Stack Developer",
+		company: "Confidential — Government / Public Office",
+		period: "July 2025 — Present",
+		desc:
+			"Building internal tools for team workflows and landing pages for public-facing programs and events, using Next.js, Laravel, and MySQL, under a confidentiality agreement.",
 	},
 	{
-		role: "Frontend Developer",
-		company: "— to confirm",
-		period: "2022 — 2024",
-		desc: "Built responsive interfaces and component libraries at scale.",
+		role: "Freelancer",
+		company: "Upwork",
+		period: "July 2024 — Present",
+		desc:
+			"Maintained and updated a Shopify-based e-commerce website for a client, handling front-end tasks and coordinating with developers.",
 	},
 	{
-		role: "Junior Developer",
-		company: "— to confirm",
-		period: "2021 — 2022",
-		desc: "Learned fast. Shipped faster.",
+		role: "Tech Intern",
+		company: "FlowerStore.PH",
+		period: "July 2023 — June 2024",
+		desc: "Assisted on developing web page for business analytics and data presentation.",
+	},
+	{
+		role: "Frontend Developer Intern",
+		company: "LexMeet",
+		period: "April — July 2023",
+		desc: "Translated Figma design to an actual website, and conducted quality checking on every webpage.",
 	},
 ];
 // ─────────────────────────────────────────────────────────────────
@@ -88,7 +96,9 @@ export default function ExperienceSection() {
 				{/* Rows */}
 				<div className='flex flex-col'>
 					{EXPERIENCE.map(({ role, company, period, desc }, i) => (
-						<div key={i} className='experience-row flex flex-col md:grid md:grid-cols-[2fr_1.5fr_1.5fr_3fr] gap-2 md:gap-4 py-lg md:py-md border-b border-border-inv opacity-0'>
+						<div
+							key={i}
+							className='experience-row flex flex-col md:grid md:grid-cols-[2fr_1.5fr_1.5fr_3fr] gap-2 md:gap-4 py-lg md:py-md border-b border-border-inv opacity-0'>
 							<div className='font-display text-xl md:text-md uppercase tracking-[-0.01em] text-ink-inv font-normal leading-[1.2]'>
 								{role}
 							</div>

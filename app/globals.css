@@ -19,7 +19,7 @@
 	--font-anton: var(--font-anton);
 
 	/* Colour */
-	--color-paper: oklch(9% 0 0);
+	--color-paper: oklch(21.779% 0.00002 271.152);
 	--color-paper-2: oklch(13% 0 0);
 	--color-paper-inv: oklch(97% 0.002 25);
 	--color-ink: oklch(97% 0.002 25);
@@ -30,7 +30,7 @@
 	--color-accent-dim: oklch(38% 0.16 25);
 	--color-accent-bright: oklch(58% 0.24 25);
 	--color-border: oklch(22% 0.005 25);
-	--color-border-inv: oklch(80% 0.005 25);
+	--color-border-inv: oklch(20.123% 0.01832 18.733);
 	--color-focus: oklch(58% 0.24 25);
 
 	/* Type scale */

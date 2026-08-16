@@ -7,13 +7,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-// ── Edit contact and marquee info here ─────────────────────────────
-const CONTACT_EMAIL = "your@email.com"; // replace with your email
-const CONTACT_GITHUB = "https://github.com/your-username"; // replace with your GitHub
-const CONTACT_LINKEDIN = "https://linkedin.com/in/your-username"; // replace with your LinkedIn
+const CONTACT_EMAIL = "sajolronniel28@gmail.com";
+const CONTACT_GITHUB = "https://github.com/ronnielsajol";
+const CONTACT_LINKEDIN = "https://www.linkedin.com/in/ronnielwebdev/";
 const MARQUEE_TEXT = "Ronniel · 2026 · Available for hire ·";
-const MARQUEE_SPEED_SECONDS = 28; // reduce to speed up, increase to slow down
-// ─────────────────────────────────────────────────────────────────
+const MARQUEE_SPEED_SECONDS = 28;
 
 const SOCIAL_LINKS = [
 	{ label: "GitHub", href: CONTACT_GITHUB },
@@ -30,9 +28,6 @@ export default function Footer() {
 	useGSAP(
 		() => {
 			if (!innerRef.current || !containerRef.current) return;
-
-			// Parallax reveal effect for the entire footer block
-			// It moves down inside the wrapper when off-screen, and catches up to 0 as it scrolls in
 			gsap.fromTo(
 				innerRef.current,
 				{ yPercent: -30 },
@@ -41,8 +36,8 @@ export default function Footer() {
 					ease: "none",
 					scrollTrigger: {
 						trigger: containerRef.current,
-						start: "top bottom", // when the top of the footer hits the bottom of the viewport
-						end: "bottom bottom", // when the bottom of the footer hits the bottom of the viewport
+						start: "top bottom",
+						end: "bottom bottom",
 						scrub: true,
 					},
 				}
@@ -52,37 +47,26 @@ export default function Footer() {
 	);
 
 	return (
-		<footer
-			id='footer'
-			ref={containerRef}
-			aria-label='Site footer'
-			className="overflow-hidden relative min-h-screen"
-		>
-			<div
-				ref={innerRef}
-				className="flex flex-col min-h-screen will-change-transform"
-			>
-				{/* --- Contact Section --- */}
+		<footer id='footer' ref={containerRef} aria-label='Site footer' className='overflow-hidden relative min-h-screen'>
+			<div ref={innerRef} className='flex flex-col min-h-screen will-change-transform'>
 				<section
 					id='contact'
-					className="bg-accent py-3xl px-page-gutter border-t-4 border-accent-dim flex flex-col items-start justify-center gap-2xl grow"
+					className='bg-accent py-3xl px-page-gutter border-t-4 border-accent-dim flex flex-col items-start justify-center gap-2xl grow'
 					aria-labelledby='contact-heading'>
 					<h2
 						id='contact-heading'
-						className="font-anton text-display uppercase leading-[1.03] tracking-[-0.03em] text-paper m-0 not-italic">
+						className='font-anton text-display uppercase leading-[1.03] tracking-[-0.03em] text-paper m-0 not-italic'>
 						Let's Build Something.
 					</h2>
 
 					<a
 						id='contact-cta'
 						href={`mailto:${CONTACT_EMAIL}`}
-						className="inline-block font-display text-lg uppercase tracking-[0.02em] leading-none text-accent bg-paper py-md px-xl no-underline transition-all duration-[var(--animate-dur-micro)] ease-out hover:bg-paper-2 focus:outline-2 focus:outline-paper focus:outline-offset-4 outline-none">
+						className='inline-block font-display text-lg uppercase tracking-[0.02em] leading-none text-accent bg-paper py-md px-xl no-underline transition-all duration-[var(--animate-dur-micro)] ease-out hover:bg-paper-2 focus:outline-2 focus:outline-paper focus:outline-offset-4 outline-none'>
 						Get In Touch
 					</a>
 
-					<ul
-						role='list'
-						className="flex flex-wrap gap-xl list-none m-0 p-0">
+					<ul role='list' className='flex flex-wrap gap-xl list-none m-0 p-0'>
 						{SOCIAL_LINKS.map(({ label, href }) => (
 							<li key={label}>
 								<a
@@ -90,7 +74,7 @@ export default function Footer() {
 									target={href.startsWith("http") ? "_blank" : undefined}
 									rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
 									aria-label={`Open ${label}`}
-									className="font-body text-sm font-bold tracking-[0.1em] uppercase text-paper no-underline border-b border-accent-dim pb-[2px] transition-colors duration-[var(--animate-dur-micro)] ease-out hover:border-paper focus:outline-2 focus:outline-paper focus:outline-offset-4 outline-none">
+									className='font-body text-sm font-bold tracking-[0.1em] uppercase text-paper no-underline border-b border-accent-dim pb-[2px] transition-colors duration-[var(--animate-dur-micro)] ease-out hover:border-paper focus:outline-2 focus:outline-paper focus:outline-offset-4 outline-none'>
 									{label}
 								</a>
 							</li>
@@ -99,25 +83,25 @@ export default function Footer() {
 				</section>
 
 				{/* --- Marquee Section --- */}
-				<div className="bg-paper border-t-2 border-accent pt-xl relative">
+				<div className='bg-paper border-t-2 border-accent pt-xl relative'>
 					<div
 						aria-hidden='true'
-						className="flex w-max"
+						className='flex w-max'
 						style={{ animation: `marquee ${MARQUEE_SPEED_SECONDS}s linear infinite` }}>
 						{Array.from({ length: COPIES }).map((_, i) => (
 							<span
 								key={i}
-								className="font-display text-2xl uppercase tracking-[-0.01em] leading-[1.1] text-accent pr-2xl whitespace-nowrap">
+								className='font-display text-2xl uppercase tracking-[-0.01em] leading-[1.1] text-accent pr-2xl whitespace-nowrap'>
 								{MARQUEE_TEXT}
 							</span>
 						))}
 					</div>
 
-					<p className="absolute w-[1px] h-[1px] overflow-hidden whitespace-nowrap [clip:rect(0_0_0_0)] [clip-path:inset(50%)]">
+					<p className='absolute w-px h-px overflow-hidden whitespace-nowrap [clip:rect(0_0_0_0)] [clip-path:inset(50%)]'>
 						Ronniel · 2026 · Available for hire
 					</p>
 
-					<p className="font-body text-xs text-ink-2 tracking-[0.06em] uppercase mt-md mx-page-gutter mb-0 text-right">
+					<p className='font-body text-xs text-ink-2 tracking-[0.06em] uppercase mt-md mx-page-gutter mb-0 text-right'>
 						&copy; {new Date().getFullYear()} Ronniel. All rights reserved.
 					</p>
 				</div>

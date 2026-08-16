@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-
 export const metadata: Metadata = {
 	title: "Ronniel — Developer & Maker",
 	description:
-		"Portfolio of Ronniel — a developer who builds things that matter. Experience, projects, and contact.",
+		"Hi, I'm Ronniel — a developer who builds things that matter. Take a look at my experience, projects, and get in touch.",
 };
 
 import { Anton } from "next/font/google";
