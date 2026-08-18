@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
+ScrollTrigger.config({ ignoreMobileResize: true });
 
 const CONTACT_EMAIL = "sajolronniel28@gmail.com";
 const CONTACT_GITHUB = "https://github.com/ronnielsajol";
@@ -29,20 +30,31 @@ export default function Footer() {
 	useGSAP(
 		() => {
 			if (!innerRef.current || !containerRef.current) return;
-			gsap.fromTo(
-				innerRef.current,
-				{ yPercent: -150 },
-				{
-					yPercent: 0,
-					ease: "none",
-					scrollTrigger: {
-						trigger: containerRef.current,
-						start: "top bottom",
-						end: "bottom bottom",
-						scrub: true,
-					},
-				}
-			);
+
+			const mm = gsap.matchMedia();
+
+			mm.add({ isMobile: "(max-width: 639px)", isDesktop: "(min-width: 640px)" }, (context) => {
+				const conditions = context.conditions as {
+					isMobile: boolean;
+					isDesktop: boolean;
+				};
+				const { isMobile } = conditions;
+				gsap.fromTo(
+					innerRef.current,
+					{ yPercent: isMobile ? -300 : -150 },
+					{
+						yPercent: 0,
+						ease: "none",
+						scrollTrigger: {
+							trigger: containerRef.current,
+							start: "top bottom",
+							end: "bottom bottom",
+							scrub: true,
+						},
+					}
+				);
+			});
+
 			gsap.fromTo(
 				marqueeRef.current,
 				{ yPercent: 100 },
@@ -57,6 +69,9 @@ export default function Footer() {
 					},
 				}
 			);
+			requestAnimationFrame(() => ScrollTrigger.refresh());
+
+			return () => mm.revert();
 		},
 		{ scope: containerRef }
 	);
@@ -66,26 +81,26 @@ export default function Footer() {
 			id='footer'
 			ref={containerRef}
 			aria-label='Site footer'
-			className='bg-accent overflow-hidden relative min-h-screen'>
-			<div ref={innerRef} className='flex flex-col min-h-screen will-change-transform'>
+			className='bg-accent overflow-hidden relative min-h-svh'>
+			<div ref={innerRef} className='flex flex-col min-h-svh will-change-transform'>
 				<section
 					id='contact'
 					className='bg-accent py-3xl px-page-gutter border-t-4 border-accent-dim flex flex-col items-start justify-center gap-2xl grow'
 					aria-labelledby='contact-heading'>
 					<h2
 						id='contact-heading'
-						className='font-anton text-display uppercase leading-[1.03] tracking-[-0.03em] text-paper m-0 not-italic'>
+						className='font-anton text-display text-center md:text-start uppercase leading-[1.03] tracking-[-0.03em] text-paper m-0 not-italic'>
 						Let's Build Something.
 					</h2>
 
 					<a
 						id='contact-cta'
 						href={`mailto:${CONTACT_EMAIL}`}
-						className='inline-block font-display text-lg uppercase tracking-[0.02em] leading-none text-accent bg-paper py-md px-xl no-underline transition-all duration-[var(--animate-dur-micro)] ease-out hover:bg-paper-2 focus:outline-2 focus:outline-paper focus:outline-offset-4 outline-none'>
+						className='inline-block text-center md:text-start font-display text-lg uppercase tracking-[0.02em] leading-none text-accent bg-paper py-md px-xl no-underline transition-all duration-[var(--animate-dur-micro)] ease-out hover:bg-paper-2 focus:outline-2 focus:outline-paper focus:outline-offset-4 outline-none'>
 						Get In Touch
 					</a>
 
-					<ul role='list' className='flex flex-wrap gap-xl list-none m-0 p-0'>
+					<ul role='list' className='flex flex-col md:flex-row md:flex-wrap gap-xl list-none m-0 p-0'>
 						{SOCIAL_LINKS.map(({ label, href }) => (
 							<li key={label}>
 								<a
@@ -102,7 +117,7 @@ export default function Footer() {
 				</section>
 			</div>
 			{/* --- Marquee Section --- */}
-			<div className='bg-paper pt-xl relative' ref={marqueeRef}>
+			<div className='bg-paper pt-sm md:pt-xl relative' ref={marqueeRef}>
 				<div
 					aria-hidden='true'
 					className='flex w-max'
@@ -120,7 +135,7 @@ export default function Footer() {
 					Ronniel · 2026 · Available for hire
 				</p>
 
-				<p className='font-body text-xs text-ink-2 tracking-[0.06em] uppercase mt-md mx-page-gutter mb-0 text-right'>
+				<p className='font-body text-xs text-ink-2 tracking-[0.06em] uppercase mt-sm md:mt-md mx-page-gutter mb-0 text-right'>
 					&copy; {new Date().getFullYear()} Ronniel. All rights reserved.
 				</p>
 			</div>

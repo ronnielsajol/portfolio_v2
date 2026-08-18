@@ -51,6 +51,7 @@ export default function StackSection() {
 				gsap.set(stackBg, { yPercent: 100 });
 
 				const onEnter = () => {
+					gsap.killTweensOf(stackBg);
 					gsap.to(splitTop.chars, {
 						yPercent: -100,
 						ease: "power2.inOut",
@@ -63,11 +64,17 @@ export default function StackSection() {
 						stagger: 0.03,
 						duration: 0.4,
 					});
-					gsap.to(stackBg, {
-						yPercent: 0,
-						duration: 0.4,
-						ease: "power2.out",
-					});
+					gsap.fromTo(
+						stackBg,
+						{
+							yPercent: 100,
+						},
+						{
+							yPercent: 0,
+							duration: 0.4,
+							ease: "power2.out",
+						}
+					);
 				};
 
 				const onLeave = () => {

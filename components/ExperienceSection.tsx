@@ -99,7 +99,7 @@ export default function ExperienceSection() {
 						<div
 							key={i}
 							className='experience-row flex flex-col md:grid md:grid-cols-[2fr_1.5fr_1.5fr_3fr] gap-2 md:gap-4 py-lg md:py-md border-b border-border-inv opacity-0'>
-							<div className='font-display text-xl md:text-md uppercase tracking-[-0.01em] text-ink-inv font-normal leading-[1.2]'>
+							<div className='font-display text-lg md:text-md uppercase tracking-[-0.01em] text-ink-inv font-normal leading-[1.2]'>
 								{role}
 							</div>
 							<div className='font-bold text-lg md:text-base text-accent'>{company}</div>
