@@ -4,8 +4,9 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
 
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
 // ── Edit your experience here ──────────────────────────────────────
 // Each entry: role, company, period, description
@@ -52,7 +53,26 @@ export default function ExperienceSection() {
 		() => {
 			if (!sectionRef.current) return;
 			const rows = gsap.utils.toArray(".experience-row");
+
+			const cleanups: (() => void)[] = [];
 			rows.forEach((row: any, i) => {
+				const expRoleTop = row.querySelector(".exp-role-top") as HTMLElement | null;
+				const expRoleBottom = row.querySelector(".exp-role-bottom") as HTMLElement | null;
+				if (!expRoleTop || !expRoleBottom) return;
+
+				const splitTop = new SplitText(expRoleTop, {
+					type: "lines,chars",
+					mask: "lines", // auto-wraps each line in its own overflow-hidden container
+					linesClass: "line-mask",
+				});
+				const splitBottom = new SplitText(expRoleBottom, {
+					type: "lines,chars",
+					mask: "lines",
+					linesClass: "line-mask",
+				});
+
+				gsap.set(splitBottom.chars, { yPercent: 100 });
+
 				gsap.fromTo(
 					row,
 					{ opacity: 0, y: 12 },
@@ -69,7 +89,31 @@ export default function ExperienceSection() {
 						delay: i * 0.1,
 					}
 				);
+
+				const onEnter = () => {
+					gsap.killTweensOf([...splitTop.chars, ...splitBottom.chars]);
+					gsap.to(splitTop.chars, { yPercent: -100, ease: "power2.inOut", stagger: 0.02, duration: 0.4 });
+					gsap.to(splitBottom.chars, { yPercent: 0, ease: "power2.inOut", stagger: 0.02, duration: 0.4 });
+				};
+
+				const onLeave = () => {
+					gsap.killTweensOf([...splitTop.chars, ...splitBottom.chars]);
+					gsap.to(splitTop.chars, { yPercent: 0, ease: "power2.inOut", stagger: 0.02, duration: 0.4 });
+					gsap.to(splitBottom.chars, { yPercent: 100, ease: "power2.inOut", stagger: 0.02, duration: 0.4 });
+				};
+
+				row.addEventListener("mouseenter", onEnter);
+				row.addEventListener("mouseleave", onLeave);
+
+				cleanups.push(() => {
+					row.removeEventListener("mouseenter", onEnter);
+					row.removeEventListener("mouseleave", onLeave);
+					splitTop.revert();
+					splitBottom.revert();
+				});
 			});
+
+			return () => cleanups.forEach((fn) => fn());
 		},
 		{ scope: sectionRef }
 	);
@@ -86,7 +130,7 @@ export default function ExperienceSection() {
 
 			<div className='flex flex-col w-full font-body tabular-nums'>
 				{/* Desktop Header */}
-				<div className='hidden md:grid md:grid-cols-[2fr_1.5fr_1.5fr_3fr] gap-4 text-left font-bold text-xs tracking-[0.12em] uppercase text-ink-inv-2 pb-sm border-b border-border-inv'>
+				<div className='hidden md:grid md:grid-cols-[2fr_1.5fr_1.5fr_3fr] gap-4 text-left font-bold text-xs tracking-[0.12em] uppercase text-ink-inv-2 pb-sm border-b border-border-inv/20'>
 					<div>Role</div>
 					<div>Company</div>
 					<div>Period</div>
@@ -98,9 +142,12 @@ export default function ExperienceSection() {
 					{EXPERIENCE.map(({ role, company, period, desc }, i) => (
 						<div
 							key={i}
-							className='experience-row flex flex-col md:grid md:grid-cols-[2fr_1.5fr_1.5fr_3fr] gap-2 md:gap-4 py-lg md:py-md border-b border-border-inv opacity-0'>
-							<div className='font-display text-lg md:text-md uppercase tracking-[-0.01em] text-ink-inv font-normal leading-[1.2]'>
-								{role}
+							className='experience-row flex flex-col md:grid md:grid-cols-[2fr_1.5fr_1.5fr_3fr] gap-2 md:gap-4 py-lg md:py-md border-b border-border-inv/20 opacity-0'>
+							<div className='exp-role font-display text-lg md:text-md uppercase tracking-[-0.01em] text-ink-inv font-normal leading-[1.2] inline-block max-w-full'>
+								<span className='relative block'>
+									<span className='exp-role-top block relative z-20'>{role}</span>
+									<span className='exp-role-bottom absolute left-0 top-0 z-10 text-accent w-full'>{role}</span>
+								</span>
 							</div>
 							<div className='font-bold text-lg md:text-base text-accent'>{company}</div>
 							<div className='text-sm text-ink-inv-2'>{period}</div>
